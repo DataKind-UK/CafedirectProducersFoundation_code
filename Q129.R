@@ -25,11 +25,11 @@ calculate_support_and_info_source <- function (country) {
 }
 
 s_uganda <- calculate_support_and_info_source(uganda)
-s_uganda <- rename(s_uganda, uganda_percent = percent)
+s_uganda <- rename(s_uganda, "Uganda (% of respondents)" = percent)
 s_uganda <- select(s_uganda, -total)
 
 s_kenya <- calculate_support_and_info_source(kenya)
-s_kenya <- rename(s_kenya, kenya_percent = percent)
+s_kenya <- rename(s_kenya, "Kenya (% of respondents)" = percent)
 s_kenya <- select(s_kenya, -total)
 
 write.csv(left_join(s_uganda, s_kenya), file = "Q129.csv")

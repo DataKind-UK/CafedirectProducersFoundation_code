@@ -1,10 +1,15 @@
+library(dplyr)
+
 calculate_support_and_info_source <- function (country) {
     possible_answers <- c("My own experimentation", "Sharing with other farmers/friends/family", 
                           "A farmer promoter visits my farm", "An extension officer visits my farm", 
-                          "Visit to demonstration farm", "Radio stations", "WeFarm", "Mobile phones", "Newspapers",
-                          "Internet", "Television", "Visiting a Centre of Excellence", "Buying Centre",
-                          "My primary cooperative", "Being a member of a local group (women’s groups etc)",
-                          "Training sessions/workshops (including FFSs)", "Training materials / leaflets", "Other (Specify)")
+                          "Visit to demonstration farm", "Radio stations", "WeFarm", 
+                          "Mobile phones", "Newspapers", "Internet", "Television", 
+                          "Visiting a Centre of Excellence", "Buying Centre",
+                          "My primary cooperative", 
+                          "Being a member of a local group (women’s groups etc)",
+                          "Training sessions/workshops (including FFSs)", 
+                          "Training materials / leaflets", "Other (Specify)")
     temp <- data.frame(response = c(), total = c())
     for (x in seq(1, 18)) {
         temp <- rbind(temp, data.frame(
@@ -17,6 +22,9 @@ calculate_support_and_info_source <- function (country) {
     temp <- temp %>% arrange(response)
     return(temp)
 }
+
+uganda <- read.csv("source-data-aka-usb-stick/UgandaEnhanced.csv")
+kenya <- read.csv("source-data-aka-usb-stick/KenyaEnhanced.csv")
 
 s_uganda <- calculate_support_and_info_source(uganda)
 s_uganda <- rename(s_uganda, "Uganda (% of respondents)" = percent)

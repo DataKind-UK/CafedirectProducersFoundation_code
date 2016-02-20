@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Specify 1 for males, 2 for females
 calculate_support_and_info_source <- function (country, gender = 0) {
     
@@ -5,7 +7,11 @@ calculate_support_and_info_source <- function (country, gender = 0) {
     
     country <- columns_transformation(country, "Q145.MostValuableSources.O")
 
-    possible_answers <- c("My own experimentation", "Sharing with other farmers/friends/family", "Guidance from farmer promoters", "Extension workers from your cooperative", "Radio stations", "WeFarm", "Mobile phones", "Newspapers", "Television", "Internet", "Centres of Excellence", "Being a member of a local group (women's groups etc)", "Training sessions/workshops (including FFSs)", "Training materials / leaflets")
+    possible_answers <- c("My own experimentation", "Sharing with other farmers/friends/family", 
+          "Guidance from farmer promoters", "Extension workers from your cooperative", 
+          "Radio stations", "WeFarm", "Mobile phones", "Newspapers", "Television", "Internet", 
+          "Centres of Excellence", "Being a member of a local group (women's groups etc)", 
+          "Training sessions/workshops (including FFSs)", "Training materials / leaflets")
     temp <- data.frame(response = c(), total = c())
     for (x in seq(1, 14)) {
         temp <- rbind(temp, data.frame(
@@ -18,6 +24,9 @@ calculate_support_and_info_source <- function (country, gender = 0) {
     temp <- temp %>% arrange(response)
     return(temp)
 }
+
+uganda <- read.csv("source-data-aka-usb-stick/UgandaEnhanced.csv")
+kenya <- read.csv("source-data-aka-usb-stick/KenyaEnhanced.csv")
 
 s_uganda <- calculate_support_and_info_source(uganda, 1)
 s_uganda <- rename(s_uganda, "Uganda (% of respondents)" = percent)

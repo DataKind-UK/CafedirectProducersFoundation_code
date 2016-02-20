@@ -12,10 +12,10 @@ columns_transformation <- function (source_table, column_name_prefix) {
 
 # EXAMPLE
 # Read the original...
-uganda <- read.csv("impact/UgandaEnhanced.csv")
+uganda <- read.csv("source-data-aka-usb-stick/UgandaEnhanced.csv")
 # ... and transform
 write.csv(columns_transformation(uganda, "Q145.MostValuableSources.O"), file = "UgandaClean.mapped.Q145_fixed.csv")
 
-kenya <- read.csv("impact/KenyaEnhanced.csv")
+kenya <- read.csv("source-data-aka-usb-stick/KenyaEnhanced.csv")
 write.csv(columns_transformation(kenya, "Q145.MostValuableSources.O"), file = "KenyaClean.mapped.Q145_fixed.csv")
                     

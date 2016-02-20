@@ -1,5 +1,7 @@
-uganda <- read.csv("../CafedirectProducersFoundation_data/DataPrep/UgandaClean.mapped.csv")
-kenya <- read.csv("../CafedirectProducersFoundation_data/DataPrep/KenyaClean.mapped.csv")
+library(dplyr)
+
+uganda <- read.csv("impact/UgandaClean.mapped.csv")
+kenya <- read.csv("impact/KenyaClean.mapped.csv")
 
 # drop the tags from the Uganda data
 # uganda <- uganda[, names(uganda)[substr(names(uganda), nchar(names(uganda)) - 4, nchar(names(uganda))) != ".Tags"]]
@@ -20,4 +22,7 @@ for (columnName in cleanUgandaColumns) {
 # drop any extra columns from both datasets
 uganda <- uganda[, ! names(uganda) %in% setdiff(names(uganda), names(kenya))]
 kenya <- kenya[, ! names(kenya) %in% setdiff(names(kenya), names(uganda))]
+
+
+uganda_cooperatives <- uganda %>% group_by(Q3.CoopSociety) %>% summarise(members_no = n()) %>% arrange(desc(members_no))
 

@@ -3,7 +3,9 @@ calculate_support_and_info_source <- function (country, gender = 0) {
     
     if (gender != 0) country <- country[country$Q10.Sex == gender, ]
     
-    responses <- table(data.matrix(country[, c("Q145.MostValuableSources.O1", "Q145.MostValuableSources.O2", "Q145.MostValuableSources.O3", "Q145.MostValuableSources.O4", "Q145.MostValuableSources.O5", "Q145.MostValuableSources.O6", "Q145.MostValuableSources.O7", "Q145.MostValuableSources.O8", "Q145.MostValuableSources.O9", "Q145.MostValuableSources.O10", "Q145.MostValuableSources.O11", "Q145.MostValuableSources.O12", "Q145.MostValuableSources.O13", "Q145.MostValuableSources.O14")]))
+    # this creates a summary of all values appearing in the specified columns and
+    # the number of occurrencies
+    responses <- table(data.matrix(country[ , sapply(seq(1, 14), function (x) { return(paste0("Q145.MostValuableSources.O", as.character(x), collapse = "")) }) ]))
     
     temp <- data.frame(response = c(), total = c())
     option_position <- 0
@@ -11,9 +13,11 @@ calculate_support_and_info_source <- function (country, gender = 0) {
         option_position <- option_position + 1
         temp <- rbind(temp, data.frame(response = option, total = ifelse(sum(names(responses) == as.character(option_position)) > 0, responses[names(responses) == as.character(option_position)], 0)))
     }
+    
     temp$percent <- temp$total / nrow(country)
     temp$response <- as.character(temp$response)
     temp <- temp %>% arrange(response)
+
     return(temp)
 }
 

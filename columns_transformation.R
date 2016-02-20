@@ -2,7 +2,7 @@ columns_transformation <- function (source_table, column_name_prefix) {
     target_columns <- names(source_table)[grepl(column_name_prefix, names(source_table))]
     max_options <- max(sapply(target_columns, function (x) { return(as.numeric(substr(x, nchar(column_name_prefix) + 1, nchar(x)))) }))
     for (row_no in seq(1, nrow(source_table))) {
-        responses <- table(data.matrix(country[row_no, sapply(seq(1, max_options), function (x) { return(paste0(column_name_prefix, as.character(x), collapse = "")) }) ]))
+        responses <- table(data.matrix(source_table[row_no, sapply(seq(1, max_options), function (x) { return(paste0(column_name_prefix, as.character(x), collapse = "")) }) ]))
         for (x in seq(1, max_options)) {
             source_table[row_no, paste0(column_name_prefix, as.character(x), collapse = "")] <- ifelse(sum(names(responses) == as.character(x)) > 0, 1, -1)
         }

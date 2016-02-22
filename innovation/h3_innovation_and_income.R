@@ -1,6 +1,9 @@
+# If any of these libraries aren't installed:
+# install.packages( c('dplyr', 'reshape2', 'ggplot2', 'readr' ) )
 library(dplyr)
 library(reshape2)
 library(ggplot2)
+library(readr)
 
 # Hypothesis 3: Farmers who innovate and adopt good ideas earn more income
 

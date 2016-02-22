@@ -1,6 +1,11 @@
+# If any of these packages aren't installed already:
+# install.packages( c('dplyr', 'reshape2', 'ggplot2', 'readr' ) )
+
 library(dplyr)
 library(reshape2)
 library(ggplot2)
+library(readr)
+
 
 # Hypothesis 4: Farmers who innovate and adopt good ideas have more diversified livelihoods. 
 
